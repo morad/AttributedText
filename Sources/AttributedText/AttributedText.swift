@@ -7,14 +7,20 @@
         @StateObject private var textViewStore = TextViewStore()
 
         private let attributedText: NSAttributedString
+        @Binding var testme: Bool
+        @Binding var testmeUrl: String
 
-        public init(_ attributedText: NSAttributedString) {
+        public init(_ attributedText: NSAttributedString, _ testme: Binding<Bool>, _ testmeUrl: Binding<String>) {
             self.attributedText = attributedText
+            self._testme = testme
+            self._testmeUrl = testmeUrl
         }
 
         public var body: some View {
             GeometryReader { geometry in
                 TextViewWrapper(
+                    testme: $testme,
+                    testmeUrl: $testmeUrl,
                     attributedText: attributedText,
                     maxLayoutWidth: geometry.maxWidth,
                     textViewStore: textViewStore
@@ -25,6 +31,7 @@
                 idealHeight: textViewStore.intrinsicContentSize?.height
             )
             .fixedSize(horizontal: false, vertical: true)
+            
         }
     }
 

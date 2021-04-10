@@ -25,12 +25,26 @@
 
         final class Coordinator: NSObject, UITextViewDelegate {
             var openURL: OpenURLAction?
+            let parent: TextViewWrapper
+
+            init(_ view: TextViewWrapper) {
+                self.parent = view
+                super.init()
+            }
+
 
             func textView(_: UITextView, shouldInteractWith URL: URL, in _: NSRange, interaction _: UITextItemInteraction) -> Bool {
 //                openURL?(URL)
+                print("ok", self.parent.testme)
+                self.parent.testmeUrl = URL.absoluteString
+                self.parent.testme.toggle()
+                
                 return false
             }
         }
+        
+        @Binding var testme: Bool
+        @Binding var testmeUrl: String
 
         let attributedText: NSAttributedString
         let maxLayoutWidth: CGFloat
@@ -64,7 +78,7 @@
         }
 
         func makeCoordinator() -> Coordinator {
-            Coordinator()
+            Coordinator(self)
         }
     }
 
