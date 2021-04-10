@@ -27,7 +27,7 @@
             var openURL: OpenURLAction?
 
             func textView(_: UITextView, shouldInteractWith URL: URL, in _: NSRange, interaction _: UITextItemInteraction) -> Bool {
-                openURL?(URL)
+//                openURL?(URL)
                 return false
             }
         }
