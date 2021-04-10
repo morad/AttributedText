@@ -35,7 +35,7 @@
                     return false
                 }
 
-                openURL?(url)
+//                openURL?(url)
                 return false
             }
         }
